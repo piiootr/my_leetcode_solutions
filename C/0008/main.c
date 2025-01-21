@@ -7,27 +7,33 @@ https://leetcode.com/problems/string-to-integer-atoi/
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <stdbool.h>
 
 int myAtoi(char* s) {
-    int solution = 0;
-    int s = 1;
-    size_t i = 0;
-    int c = 0;
+    int i = 0;
+    int l_str = (int) strlen(s);
+    long solution = 0l;
 
     if(!s) return 0;
 
-    while(i < strlen(s)) {
-        i++;
+    while(i < l_str) {
+        if(s[i] == ' ') i++;
+        else if(s[i] == '+' || s[i] == '-') break;
+        else if(s[i] >= '0' || s[i] <= '9') break;
+        else return 0;
     }
 
-    return solution;
+    solution = strtol(&(s[i]), NULL, 10);
+    if(solution < INT_MIN) solution = INT_MIN;
+    if(solution > INT_MAX) solution = INT_MAX;
+    return (int) solution;
 }
 
 int main(int argc, char** argv)
 {
-    char s[] = "-123";
+    char s[] = " b11228552307";
+    //char s[] = " 42";
+    printf("d: %d\n", myAtoi(s));
     printf("s: %s\n", s);
-    printf("i: %d\n", d);
-
     return 0;
 }
