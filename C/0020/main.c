@@ -12,8 +12,7 @@ https://leetcode.com/problems/valid-parentheses/
 
 bool isValid(char* s) {
     size_t i;
-    int counters[6] = {0};
-    char str;
+    char *str;
     int c = 0;
 
     str = malloc(strlen(s));
@@ -21,27 +20,34 @@ bool isValid(char* s) {
     if(strlen(s) < 2) return false;
 
     for(i = 0; i < strlen(s); i++) {
-        if(s[i] = '(' || str[i] == '')
-        switch(s[i]) {
-            case '(': str[c] = s[i]; break;
-            case ')': counters[0]--; break;
-            case '[': counters[1]++; break;
-            case ']': counters[1]--; break;
-            case '{': counters[2]++; break;
-            case '}': counters[2]--; break;
+        printf("i: %lu - s: %c - c: %d\n", i, s[i], c);
+        if(s[i] == '(' || s[i] == '[' || s[i] == '{') {
+            str[c++] = s[i];
+        } else {
+            if(c == 0) return false;
+            if(s[i] == ')') {
+                if(str[c - 1] == '(') c--;
+                else return false;
+            } else if(s[i] == ']') {
+                if(str[c - 1] == '[') c--;
+                else return false;
+            } else {
+                if(str[c - 1] == '{') c--;
+                else return false;
+            }
         }
-        if(counters[0] < 0 || counters[1] < 0 || counters[2] < 0) return false;
     }
 
-    if(counters[0] == 0 && counters[1] == 0 && counters[2] == 0) return true;
-
-    return true;
+    return false;
 }
 
 
 int main(int argc, char** argv)
 {
-    char s[] = "([)]";
+    //char s[] = "([)]";
+    //char s[] = "()";
+    //char s[] = "()[]{}";
+    char s[] = "(((";
 
     // "[(())]"
 
