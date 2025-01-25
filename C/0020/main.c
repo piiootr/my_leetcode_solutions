@@ -49,8 +49,6 @@ int main(int argc, char** argv)
     //char s[] = "()[]{}";
     char s[] = "(((";
 
-    // "[(())]"
-
 printf("%s\n", isValid(s) ? "true" : "false");
     return 0;
 }
