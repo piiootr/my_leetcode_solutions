@@ -1,6 +1,6 @@
 /*
 0204
-https://leetcode.com/problems/count-primes/description/
+https://leetcode.com/problems/count-primes/
 */
 
 #include <stdio.h>
